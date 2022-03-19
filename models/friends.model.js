@@ -2,17 +2,22 @@ const friends = [
     {
         id: 1,
         name: 'John',
-        age: 30,
+        age: 25,
     },
     {
         id: 2,
         name: 'Jane',
-        age: 25,
+        age: 26,
     },
     {
         id: 3,
-        name: 'Bob',
-        age: 20,
+        name: 'Jack',
+        age: 27,
+    },
+    {
+        id: 4,
+        name: 'Jill',
+        age: 28,
     },
 ];
 module.exports = friends;

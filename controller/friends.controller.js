@@ -1,42 +1,35 @@
-const friends = require('./models/friends.model');
+const friends = require('../models/friends.model');
 
-function getAllFriend(req, res) {
-    if (friends.length > 0 && friends) {
-        res.json(friends);
+const getAllFriends = (req, res) => {
+    if (friends.length === 0) {
+        res.status(404).send('No friends found');
     } else {
-        res.json({
-            message: 'No friends found',
-        });
+        res.send(friends);
     }
-}
-function getIndividualFriend(req, res) {
+};
+const getFriendById = (req, res) => {
     const { id } = req.params;
     const friend = friends.find((f) => f.id === +id);
-    if (friend) {
-        res.json(friend);
-    } else {
-        res.json({
-            id: 'No id found',
-        });
+    if (!friend) {
+        res.status(404).send('Friend not found');
     }
-}
-function addFriend(req, res) {
+    res.send(friend);
+};
+const createFriend = (req, res) => {
     const { name, age } = req.body;
     if (!name || !age) {
-        res.json({
-            message: 'Please provide name and age',
-        });
+        res.status(400).send('Name and age are required');
     }
-    const newFriend = {
+    const friend = {
         id: friends.length + 1,
         name,
         age,
     };
-    friends.push(newFriend);
-    res.json(newFriend);
-}
+    friends.push(friend);
+    res.send(friend);
+};
 module.exports = {
-    getAllFriend,
-    getIndividualFriend,
-    addFriend,
+    getAllFriends,
+    getFriendById,
+    createFriend,
 };
