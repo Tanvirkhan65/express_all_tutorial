@@ -1,6 +1,8 @@
 const express = require('express');
 
 const app = express();
+app.set('view engine', 'ejs');
+
 app.param('id', (req, res, next, id) => {
     const user = {
         id,
@@ -22,7 +24,12 @@ app.route('/home')
     .post((req, res) => {
         res.send('Hello World! post');
     });
-
+app.get('/html', (req, res) => {
+    res.render('index');
+});
+app.get('/html/about', (req, res) => {
+    res.render('pages/about');
+});
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });
